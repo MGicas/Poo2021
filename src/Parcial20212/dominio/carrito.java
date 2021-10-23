@@ -1,11 +1,17 @@
 package Parcial20212.dominio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class carrito {
     public static final byte CANTIDAD_MAXIMA = 20;
     private String supermercado;
     private List<Producto> productos;
+
+    public carrito (String supermercado){
+        this.supermercado
+    }
+}
 
     public Producto buscar(String nombre){
         Producto productoBuscado = null;
@@ -18,13 +24,13 @@ public class carrito {
         }
         return productoBuscado;
     }
+    //  prpductoBuscado = this.productos.stream().filter(p->p.getNombre().equalsIgnoreCase(nombre).findFirst()or else()
 
     public List<Producto> buscarTipo(String tipo){
-        List<Producto> buscar = new ArrayList<>();
+        List<Producto> productoBuscado = this.productos.stream().filter(prod->prod.getTipo().equals(tipo)).collect(Collectors.toList());
+        return productoBuscado;
 
-        for (Producto producto: this.productos){
-            if(producto.getCantidadActual() == 0);
-        }
+        //
     }
 
     public boolean agregar(Producto p){
@@ -32,35 +38,41 @@ public class carrito {
            this.productos.add(p);
            return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
-    public boolean sacardelcarrito(String nombre){
-        Producto productoBuscado = buscar(nombre);
+    public boolean sacardelcarrito(Producto producto){
+        Producto productoBuscado = buscar(producto.getNombre());
+        //Producto productoASacar = buscar(nombre)
 
         if (productoBuscado != null){
-            this.productos.remove(productoBuscado);
+            this.productos.remove(producto);
+            //this.productos.remove(productoASacar);
             return true;
         }
-
         return false;
     }
 
     public int calcularValorTotal(){
         int valorTotal = 0;
 
-        for (Producto p: this.productos) {
-            valorTotal += p.getPrecio();
+        for (Producto prod:this.productos) {
+            valorTotal += prod.getPrecio();
         }
+        //for (Producto p: this.productos) {
+            //valorTotal += p.getPrecio();
+        //}
+        //valorTotal= this.productos.stream().mapToInt(p->getPrecio()).sum
         return valorTotal;
     }
 
-    public Producto productoMasCaro(){
-        int otroprecio;
+    public getProductoMasCaro(){
+        Producto productoMasCaro = null;
 
-        if(productoMasCaro.getprecio>otroprecio){
-        System.out.println("El producto más caro");
+        for (Producto p: this.productos){
+            if(p.getPrecio()>productoMasCaro.getPrecio)
+        }
 
-        return productoMasCaro()
     }
-}
